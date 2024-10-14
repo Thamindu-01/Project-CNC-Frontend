@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Animated Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            color: #ffd700;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 200px;
+            opacity: 0;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s forwards;
+        }
+
+        .fade-in.delay-1 {
+            animation-delay: 0.5s;
+        }
+
+        .fade-in.delay-2 {
+            animation-delay: 1s;
+        }
+
+        .fade-in.delay-3 {
+            animation-delay: 1.5s;
+        }
+
+        .fade-in.delay-4 {
+            animation-delay: 2s;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .upcoming-events {
+            margin-top: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch user data from local storage or session storage (as an example)
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            if (userData) {
+                document.querySelector('.welcome-message').innerHTML = `Welcome, ${userData.name}! Address: ${userData.address}, Phone: ${userData.phone}`;
+            }
+
+            const refreshButton = document.querySelector('.refresh-btn');
+            refreshButton.addEventListener('click', () => {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Revenue</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Partners</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="welcome-message">Welcome!</div>
+                <a href="../templates/login.html" class="logout-btn">Log Out</a>
+            </div>
+            <div class="content">
+                <div class="card fade-in">
+                    <h3>Users</h3>
+                    <p>1,024</p>
+                </div>
+                <div class="card fade-in delay-1">
+                    <h3>Sales</h3>
+                    <p>$12,450</p>
+                </div>
+                <div class="card fade-in delay-2">
+                    <h3>Visits</h3>
+                    <p>25,632</p>
+                </div>
+                <div class="card fade-in delay-3">
+                    <h3>Revenue</h3>
+                    <p>$50,000</p>
+                </div>
+                <div class="card fade-in delay-4">
+                    <h3>Product Categories</h3>
+                    <p>12 Categories</p>
+                </div>
+            </div>
+            <div class="upcoming-events">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li>Partner Meeting - June 10th</li>
+                    <li>New Product Launch - July 15th</li>
+                    <li>Annual Review - August 25th</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
